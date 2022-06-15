@@ -14,6 +14,6 @@ class Document extends Model
     }
 
     public function file(){
-        return $this->belongsTo('App\File');
+        return $this->belongsTo('App\Models\File');
     }
 }

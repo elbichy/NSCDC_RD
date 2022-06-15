@@ -44,7 +44,7 @@
             @auth
             <!-- Dropdown Structure -->
             <ul id="dropdown1" class="dropdown-content">
-                <li><a href="{{ route('personnel_show', auth()->user()->id) }}"><i class="material-icons left">person</i> Profile</a></li>
+                <li><a href="#"><i class="material-icons left">person</i> Profile</a></li>
                 <li class="divider"></li>
                 <li>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -123,13 +123,13 @@
                 <div class="collapsible-body">
                 <ul>
                     <li class="{{(request()->segment(4) == 'new') ? 'active' : ''}}">
-                        <a href="{{ route('correspondence_create') }}">New</a>
+                        <a href="#">New</a>
                     </li>
                     <li class="{{(request()->segment(4) == 'incoming') ? 'active' : ''}}">
-                        <a href="{{ route('correspondence_incoming') }}">Incoming</a>
+                        <a href="#">Incoming</a>
                     </li>
                     <li class="{{(request()->segment(4) == 'outgoing') ? 'active' : ''}}">
-                        <a href="{{ route('correspondence_outgoing') }}">Outgoing</a>
+                        <a href="#">Outgoing</a>
                     </li>
                 </ul>
                 </div>
@@ -139,7 +139,7 @@
         
         {{-- SETTINGS --}}
         <li class="{{(request()->segment(2) == 'settings') ? 'active' : ''}}">
-            <a style="padding:0 32px;" href="{{ route('app_settings') }}"><i class="fal fa-cog fa-2x"></i></i>APP SETTINGS</a>
+            <a style="padding:0 32px;" href="#"><i class="fal fa-cog fa-2x"></i></i>APP SETTINGS</a>
         </li>
         {{-- OTHER MENU RIGHT FOR MOBILE DEVICES --}}
         <li class="hide-on-med-and-up col s12" style="justify-self: flex-end; margin-top: auto;">

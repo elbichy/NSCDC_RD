@@ -34,7 +34,7 @@ class FileController extends Controller
         $file = File::get();
         return DataTables::of($file)
             ->editColumn('name', function ($file) {
-                return "<b><a href=\"/dashboard/files/$file->id\">$file->name</a></b>";
+                return "<b><a href=\"/dashboard/files/personnel/$file->id\">$file->name</a></b>";
             })
             ->addColumn('checkbox', function($redeployment) {
                 return '<input type="checkbox" name="fileCheckbox[]" class="fileCheckbox browser-default" value="'.$redeployment->id.'" />';
@@ -76,7 +76,7 @@ class FileController extends Controller
 
                     $upload = File::find($files->id)->documents()->create([
                         'title' => $file_name,
-                        'file' => $image->getClientOriginalName()
+                        'file_name' => $image->getClientOriginalName()
                     ]);
                 }
             }
@@ -91,7 +91,8 @@ class FileController extends Controller
     // SHOW SPECIFIC FILE
     public function show(File $file)
     {   
-        return view('dashboard/file/show');
+        $file = File::with('documents')->first();
+        return view('dashboard.file.show', compact(['file']));
     }
 
     // UPLOAD A FILE(S)
@@ -227,9 +228,9 @@ class FileController extends Controller
     public function destroyDocument($id)
     {
         $document = Document::where('id', $id)->with('file')->first();
-        $arr = explode('/', $document->file);
+        $arr = explode('/', $document->file_name);
         $file = end($arr);
-        Storage::delete('public/files/'.$document->file->service_number.'/'.$file);
+        Storage::delete('public/files/'.$document->file->file_number.'/'.$file);
         $document->delete();
         Alert::success('Document deleted successfully!', 'Success!')->autoclose(2500);
         return redirect()->back();

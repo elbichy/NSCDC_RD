@@ -17,7 +17,7 @@ class CreateDocumentsTable extends Migration
             $table->unsignedBigInteger('id')->autoIncrement();
             $table->unsignedBigInteger('file_id')->index();
             $table->string('title')->nullable();
-            $table->string('file');
+            $table->string('file_name');
             $table->string('type')->nullable();
             $table->timestamps();
         });

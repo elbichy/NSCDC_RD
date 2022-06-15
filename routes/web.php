@@ -68,7 +68,7 @@ Route::group(['prefix' => 'dashboard'], function (){
 		Route::get('/new', [FileController::class, 'create'])->name('file_create');
 		Route::get('/personnel', [FileController::class, 'index'])->name('file_personnel');
 		Route::get('/get_personnel', [FileController::class, 'get_personnel'])->name('file_get_personnel');
-		Route::get('/{user}', [FileController::class, 'show'])->name('file_show');
+		Route::get('/personnel/{user}', [FileController::class, 'show'])->name('file_show');
 		Route::post('/store', [FileController::class, 'store'])->name('store_file');
 		Route::get('{user}/edit/', [FileController::class, 'edit'])->name('file_edit');
 		

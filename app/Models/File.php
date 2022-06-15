@@ -31,6 +31,16 @@ class File extends Model
     {
         $this->attributes['name'] = strtolower($value);
     }
+    
+    public function getNameAttribute($value)
+    {
+        return ucwords($value);
+    }
+    
+    public function getTypeAttribute($value)
+    {
+        return ucwords($value);
+    }
 
     public function documents(){
         return $this->hasMany('App\Models\Document');

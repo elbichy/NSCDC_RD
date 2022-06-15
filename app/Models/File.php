@@ -27,6 +27,11 @@ class File extends Model
 
     protected $dates = ['created_at', 'updated_at'];
 
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtolower($value);
+    }
+
     public function documents(){
         return $this->hasMany('App\Models\Document');
     }

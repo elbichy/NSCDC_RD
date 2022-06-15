@@ -42,9 +42,9 @@
 								<label for="type">* Select Type</label>
 								<select id="type" name="type" class=" browser-default" required>
 									<option disabled>Select Type</option>
-									<option value="male" selected>Personnel</option>
-									<option value="female">Policy</option>
-									<option value="other">Archive</option>
+									<option value="personnel" selected>Personnel</option>
+									<option value="policy">Policy</option>
+									<option value="archive">Archive</option>
 								</select>
 								@if ($errors->has('type'))
 									<span class="helper-text red-text">
@@ -88,12 +88,7 @@
 
 @push('scripts')
 	<script>
-		var new_personnel = new Vue({
-			el: '#new',
-			data: {
-				isDisabled: false
-			}
-		})
+		
 		$(document).ready(function(){
 			$('.dob_datepicker').datepicker({
 				format: 'dd/mm/yyyy',

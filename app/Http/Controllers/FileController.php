@@ -8,6 +8,7 @@ use App\Models\File;
 use Illuminate\Http\Request;
 // use Alert;
 use RealRashid\SweetAlert\Facades\Alert;
+
 use App\Models\Document;
 use App\Models\Rank;
 use Illuminate\Support\Facades\Storage;
@@ -26,11 +27,11 @@ class FileController extends Controller
     // SHOW ALL FILES
     public function index()
     {
-        return view('dashboard.file.all');
+        return view('dashboard.file.personnel');
     }
 
-    public function get_all(){
-        $file = File::orderByRaw("FIELD(rank_full, 'Commandant General of Corps', 'Deputy Commandant General of Corps', 'Assistant Commandant General of Corps', 'Commandant of Corps', 'Deputy Commandant of Corps', 'Assistant Commandant of Corps', 'Chief Superintendent of Corps', 'Superintendent of Corps', 'Deputy Superintendent of Corps', 'Assistant Superintendent of Corps I', 'Assistant Superintendent of Corps II', 'Chief Inspector of Corps', 'Deputy Chief Inspector of Corps', 'Assistant Chief Inspector of Corps', 'Principal Inspector of Corps I', 'Principal Inspector of Corps II', 'Senior Inspector of Corps', 'Inspector of Corps', 'Assistant Inspector of Corps', 'Chief Corps Assistant', 'Senior Corps Assistant', 'Corps Assistant I', 'Corps Assistant II', 'Corps Assistant III')")->orderBy('service_number', 'ASC');
+    public function get_personnel(){
+        $file = File::get();
         return DataTables::of($file)
             ->editColumn('name', function ($file) {
                 return "<b><a href=\"/dashboard/files/$file->id\">$file->name</a></b>";
@@ -51,8 +52,7 @@ class FileController extends Controller
     // STORE NEW FILE
     public function store(Request $request)
     {
-        dd($request);
-        // return $request;
+
         $validation = $request->validate([
             'name' => 'required|string',
             'file_number' => 'required|numeric',
@@ -62,8 +62,8 @@ class FileController extends Controller
         
         $files = File::create([
             'name' => $request->name,
-            'file_number' => $request->dob,
-            'type' => $request->sex
+            'file_number' => $request->file_number,
+            'type' => $request->type
         ]);
 
         if($files){
@@ -72,7 +72,7 @@ class FileController extends Controller
                 foreach($images as $image)
                 {
                     $file_name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                    $image->storeAs('public/files/'.$files->service_number.'/', $image->getClientOriginalName());
+                    $image->storeAs('public/files/'.$files->file_number.'/', $image->getClientOriginalName());
 
                     $upload = File::find($files->id)->documents()->create([
                         'title' => $file_name,

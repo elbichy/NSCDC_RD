@@ -89,7 +89,7 @@
         {{-- PERSONNEL --}}
         <li class="no-padding">
             <ul class="collapsible collapsible-accordion">
-                <li class="{{ request()->segment(2) == 'personnel' ? 'active' :  ''}}">
+                <li class="{{ request()->segment(2) == 'files' ? 'active' :  ''}}">
                     <a style="padding:0 32px;" class="collapsible-header">
                         <i class="fal fa-folder-open fa-2x"></i>ALL FILES<i class="material-icons right">arrow_drop_down</i>
                     </a>

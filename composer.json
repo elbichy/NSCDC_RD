@@ -18,7 +18,7 @@
         "milon/barcode": "^8.0",
         "phpoffice/phpword": "^0.18.2",
         "rap2hpoutre/fast-excel": "^3.1",
-        "realrashid/sweet-alert": "^4.1",
+        "realrashid/sweet-alert": "^3.1",
         "spatie/laravel-permission": "^5.4",
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-oracle": "~9.0"

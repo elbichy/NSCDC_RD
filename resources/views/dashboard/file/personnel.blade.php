@@ -5,41 +5,31 @@
         <div class="content-container">
             <div class="sectionWrap">
                 {{-- SALES HEADING --}}
-                <h6 class="center sectionHeading">PERSONNEL - All RECORDS</h6>
+                <h6 class="center sectionHeading">FILES - All RECORDS</h6>
 
                 {{-- SALES TABLE --}}
                 <div class="sectionTableWrap z-depth-1">
                     <div class="row topMenuWrap">
-                        <a href="#" id="blueBtn" class="blueBtn btn btn-small"><i class="material-icons right">format_list_bulleted</i>eligibility list</a>
-                        <a href="#" id="greenBtn" class="greenBtn btn btn-small green darken-2 white-text"><i class="material-icons right">format_list_bulleted</i>norminal roll</a>
+                        {{-- <a href="#" id="blueBtn" class="blueBtn btn btn-small"><i class="material-icons right">format_list_bulleted</i>eligibility list</a>
+                        <a href="#" id="greenBtn" class="greenBtn btn btn-small green darken-2 white-text"><i class="material-icons right">format_list_bulleted</i>norminal roll</a> --}}
                     </div>
-                    <table class="table centered table-bordered" id="users-table">
+                    <table class="table table-bordered" id="users-table">
                         <thead>
                             <tr>
                                 <th><input type='checkbox' class='browser-default selectAll'></th>
                                 <th>SN</th>
-                                <th>Fullname</th>
-                                <th>Svc No.</th>
-                                <th>Sex</th>
-                                <th>DOB</th>
-                                <th>DOFA</th>
-                                <th>DOPA</th>
-                                <th>Rank</th>
-                                <th>Formation</th>
+                                <th>File No.</th>
+                                <th>File name</th>
+                                <th>Type</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th></th>
                                 <th>SN</th>
-                                <th>Fullname</th>
-                                <th>Svc No.</th>
-                                <th>Sex</th>
-                                <th>DOB</th>
-                                <th>DOFA</th>
-                                <th>DOPA</th>
-                                <th>Rank</th>
-                                <th>Formation</th>
+                                <th>File No.</th>
+                                <th>File name</th>
+                                <th>Type</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -72,7 +62,7 @@
                 "lengthMenu": [[50, 100, 150, 250, 300, -1], [50, 100, 150, 250, 300, "All"]],
                 processing: true,
                 serverSide: true,
-                ajax:  `{!! route('personnel_get_all') !!}`,
+                ajax:  `{!! route('file_get_personnel') !!}`,
                 columns: [
                     { data: 'checkbox', name: 'checkbox', orderable: false, searchable: false},
                     {
@@ -82,14 +72,9 @@
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }, "orderable": false, "searchable": false
                     },
+                    { data: 'file_number', name: 'file_number'},
                     { data: 'name', name: 'name' },
-                    { data: 'service_number', name: 'service_number'},
-                    { data: 'sex', name: 'sex'},
-                    { data: 'dob', name: 'dob'},
-                    { data: 'dofa', name: 'dofa'},
-                    { data: 'dopa', name: 'dopa'},
-                    { data: 'rank_short', name: 'rank_short'},
-                    { data: 'current_formation', name: 'current_formation'}
+                    { data: 'type', name: 'type'},
                 ],
                 initComplete: function () {
                     this.api().columns().every(function () {

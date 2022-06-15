@@ -47,7 +47,7 @@
 			<div class="heading">
 				<img src="{{ asset('storage/pdfLogo.png') }}" alt="logo" width="100px" height="100px">
 				<h6 class="">Nigeria Security & Civil Defence Corps</h6>
-				<p class="">Personnel Management Platform</p>
+				<p class="">Records & Documentation Platform</p>
 			</div>
 			<form action="{{ route('login') }}" method="POST" class="form row" id="login_form">
 				@csrf

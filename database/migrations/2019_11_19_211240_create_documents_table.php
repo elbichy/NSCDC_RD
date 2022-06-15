@@ -15,15 +15,16 @@ class CreateDocumentsTable extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->autoIncrement();
-            $table->unsignedBigInteger('user_id')->index();
+            $table->unsignedBigInteger('file_id')->index();
             $table->string('title')->nullable();
             $table->string('file');
+            $table->string('type')->nullable();
             $table->timestamps();
         });
 
         Schema::table('documents', function ($table) {
-            $table->foreign('user_id')
-            ->references('id')->on('users')
+            $table->foreign('file_id')
+            ->references('id')->on('files')
             ->onDelete('cascade');
         });
 

@@ -4,17 +4,14 @@
     padding: 0;
     box-sizing: border-box;
   }
-
   button,
 input {
     transition: all 200ms ease-in-out;
   }
-
   html {
     width: 100%;
     height: 100%;
   }
-
   body {
     width: 100%;
     height: 100%;
@@ -33,11 +30,9 @@ input {
   body .swal2-container .swal2-modal .swal2-content .select-wrapper {
     display: none !important;
   }
-
   a {
     color: var(--primary-bg-dark);
   }
-
   #permissionWrapper [type=checkbox].filled-in:checked + span:not(.lever):after {
     top: 0;
     width: 20px;
@@ -46,7 +41,6 @@ input {
     background-color: transparent !important;
     z-index: 0;
   }
-
   .pace {
     -webkit-pointer-events: none;
     pointer-events: none;
@@ -61,11 +55,9 @@ input {
     transform: translate3d(0, -50px, 0);
     transition: transform 0.5s ease-out;
   }
-
   .pace.pace-active {
     transform: translate3d(0, 0, 0);
   }
-
   .pace .pace-progress {
     display: block;
     position: fixed;
@@ -77,23 +69,18 @@ input {
     background: var(--switch-light);
     pointer-events: none;
   }
-
   .autocomplete-content img {
     display: none;
   }
-
   .preloader-wrapper {
     display: none;
   }
-
   .switch label input[type=checkbox]:checked + .lever {
     background-color: var(--switch-dark);
   }
-
   .switch label input[type=checkbox]:checked + .lever:after {
     background-color: var(--switch-dark);
   }
-
   .switch label .lever {
     content: "";
     display: inline-block;
@@ -107,12 +94,10 @@ input {
     vertical-align: middle;
     margin: 0 16px;
   }
-
   .switch label .lever:after {
     background-color: var(--switch-dark);
     box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
   }
-
   .dropdown-content li > span {
     font-size: 16px;
     color: var(--primary-bg-dark);
@@ -120,21 +105,18 @@ input {
     line-height: 22px;
     padding: 14px 16px;
   }
-
   .btn {
     background: var(--button-dark);
   }
   .btn:hover {
     background: var(--button-light);
   }
-
   table tbody tr td .delete {
     color: red;
   }
   table tbody tr td .recieptBtn {
     color: var(--primary-bg-dark);
   }
-
   .app {
     width: 100%;
     min-height: 100%;
@@ -246,7 +228,7 @@ input {
   .app .sidenav.sidenav-fixed .sideNavContainer {
     width: 100%;
     height: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-right: 17px;
     box-sizing: content-box;
   }
@@ -557,7 +539,7 @@ input {
   }
   .app .my-content-wrapper .content-container .sectionWrap .sectionFormWrap .formMsg {
     padding: 10px 12px !important;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     color: #186e98;
   }
   .app .my-content-wrapper .content-container .sectionWrap .sectionFormWrap #create_form fieldset {
@@ -646,11 +628,11 @@ input {
   }
   .app .my-content-wrapper .content-container .sectionWrap .sectionFormWrap .eligibilityWrap .grouping a p {
     font-weight: bold;
-    color: #fafafa;
+    color: rgb(250, 250, 250);
   }
   .app .my-content-wrapper .content-container .sectionWrap .sectionFormWrap .eligibilityWrap .grouping a h3 {
     font-weight: bold;
-    color: #fafafa;
+    color: rgb(250, 250, 250);
     margin: 0;
   }
   .app .my-content-wrapper .content-container .sectionWrap .sectionTableWrap {
@@ -664,7 +646,7 @@ input {
     padding: 1rem !important;
   }
   .app .my-content-wrapper .content-container .sectionWrap .sectionTableWrap .topMenuWrap {
-    background: #fafafa;
+    background: rgb(250, 250, 250);
     padding: 10px;
     position: -webkit-sticky;
     position: sticky;
@@ -944,7 +926,7 @@ input {
     text-align: center;
   }
   .app .my-content-wrapper .content-container .sectionWrap .sectionGridWrap .grid-collection .grid-collection-item i {
-    color: red;
+    color: rgb(255, 0, 0);
   }
   .app .my-content-wrapper .content-container .sectionWrap .sectionGridWrap .grid-collection .grid-collection-item .badge {
     margin: 0 0 0 0px;
@@ -1017,7 +999,7 @@ input {
   }
   .app .my-content-wrapper .content-container .sectionWrap .sectionProfileWrap .profile .infoWrap .row #countdowntimer #label_timer {
     background: none !important;
-    color: white !important;
+    color: rgb(255, 255, 255) !important;
     float: none !important;
     width: 100% !important;
     font-size: 15px !important;

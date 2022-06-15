@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>
-        {{ config('app.name', 'NSCDC Admin Directorate Database') }}@isset($title) - {{ $title }}@endisset
+        {{ config('app.name', 'NSCDC Records & Documentation Platform') }}@isset($title) - {{ $title }}@endisset
     </title>
     <link rel="shortcut icon" href="{{ asset('storage/fav.png') }}">
 

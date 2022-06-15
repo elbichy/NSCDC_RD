@@ -42,9 +42,9 @@
 								<label for="type">* Select Type</label>
 								<select id="type" name="type" class=" browser-default" required>
 									<option disabled>Select Type</option>
-									<option value="personnel" selected>Personnel</option>
-									<option value="policy">Policy</option>
-									<option value="archive">Archive</option>
+									<option value="male" selected>Personnel</option>
+									<option value="female">Policy</option>
+									<option value="other">Archive</option>
 								</select>
 								@if ($errors->has('type'))
 									<span class="helper-text red-text">
@@ -64,14 +64,6 @@
 									<input class="file-path validate" type="text" placeholder="Upload one or more files">
 								</div>
 							</div>
-							
-							{{-- <div class="input-field col s12 input-group hdtuto control-group lst increment" >
-								<input type="file" name="filenames[]" class="myfrm form-control">
-								<div class="input-group-btn"> 
-									<button class="btn btn-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Add</button>
-								</div>
-							</div> --}}
-
 
 							<div class="input-field col s12 l3 right">
 								<button class="submit btn waves-effect waves-light right" type="submit">
@@ -85,11 +77,6 @@
 						</fieldset>
 
 					</form>
-					<div class="fixed-action-btn">
-						<a href="{{ route('import_data') }}" title="Import record from excel doc." class="btn-floating btn-large waves-effect waves-light green">
-							<i class="fas fa-file-excel"></i>
-						</a>
-					</div>
 				</div>
             </div>
         </div>

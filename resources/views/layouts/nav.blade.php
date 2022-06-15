@@ -80,7 +80,7 @@
                 </span></a>
 
                 {{-- BUSINESS BRANCH AND ADDRESS --}}
-                <a href="#email"><span class="white-text email">Personnel Management Platform</span></a>
+                <a href="#email"><span class="white-text email">Records & Documentation Platform</span></a>
             </div>
         </li>
         <li class="{{(request()->segment(1) == 'dashboard' && request()->segment(2) == NULL) ? 'active' : ''}}">
@@ -91,19 +91,49 @@
             <ul class="collapsible collapsible-accordion">
                 <li class="{{ request()->segment(2) == 'personnel' ? 'active' :  ''}}">
                     <a style="padding:0 32px;" class="collapsible-header">
-                        <i class="fal fa-users fa-2x"></i>PERSONNEL RECORDS<i class="material-icons right">arrow_drop_down</i>
+                        <i class="fal fa-folder-open fa-2x"></i>ALL FILES<i class="material-icons right">arrow_drop_down</i>
                     </a>
                     <div class="collapsible-body">
                         <ul>
                             <li class="{{(request()->segment(3) == 'new') ? 'active' : ''}}">
-                                <a href="{{ route('personnel_create') }}">Create new</a>
+                                <a href="{{ route('file_create') }}">Create new</a>
+                            </li>
+                            <li class="{{(request()->segment(3) == 'personnel') ? 'active' : ''}}">
+                                <a href="{{ route('file_personnel') }}">Personnel</a>
                             </li>
                             <li class="{{(request()->segment(3) == 'all') ? 'active' : ''}}">
-                                <a href="{{ route('personnel_all') }}">Personnel</a>
+                                <a href="#">Policy</a>
+                            </li>
+                            <li class="{{(request()->segment(3) == 'all') ? 'active' : ''}}">
+                                <a href="#">Archive</a>
                             </li>
                         </ul>
                     </div>
                 </li>
+            </ul>
+        </li>
+
+        {{-- CORRESPONDENCE --}}
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+            <li class="{{ request()->segment(3) == 'correspondence' ? 'active' : ''}}">
+                <a style="padding:0 32px;" class="collapsible-header">
+                    <i class="fal fa-exchange-alt fa-2x"></i>CORRESPONDENCE<i class="material-icons right">arrow_drop_down</i>
+                </a>
+                <div class="collapsible-body">
+                <ul>
+                    <li class="{{(request()->segment(4) == 'new') ? 'active' : ''}}">
+                        <a href="{{ route('correspondence_create') }}">New</a>
+                    </li>
+                    <li class="{{(request()->segment(4) == 'incoming') ? 'active' : ''}}">
+                        <a href="{{ route('correspondence_incoming') }}">Incoming</a>
+                    </li>
+                    <li class="{{(request()->segment(4) == 'outgoing') ? 'active' : ''}}">
+                        <a href="{{ route('correspondence_outgoing') }}">Outgoing</a>
+                    </li>
+                </ul>
+                </div>
+            </li>
             </ul>
         </li>
         

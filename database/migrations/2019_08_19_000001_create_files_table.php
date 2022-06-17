@@ -18,6 +18,7 @@ class CreateFilesTable extends Migration
             $table->string('name')->nullable();
             $table->string('file_number');
             $table->string('type')->nullable();
+            $table->string('passport')->nullable();
             $table->timestamps();
         });
     }

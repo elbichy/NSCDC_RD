@@ -55,9 +55,18 @@
 						</fieldset>
 						<fieldset class="row" id="uploads" style="width:100%; margin-left: 0; margin-right: 0;">
 							<legend>DOCUMENTS</legend>
-							<div class="file-field col s12 input-field">
+							<div class="file-field col s12 l6 input-field">
 								<div class="uploadBtn">
-									<span>SELECT SCANNED FILES</span>
+									<span>SELECT PASSPORT</span>
+									<input type="file" name="passport" id="passport" accept="image/*">
+								</div>
+								<div class="file-path-wrapper">
+									<input class="file-path validate" type="text" placeholder="Upload passport">
+								</div>
+							</div>
+							<div class="file-field col s12 l6 input-field">
+								<div class="uploadBtn">
+									<span>SELECT SCANNED DOCUMENTS</span>
 									<input type="file" name="file[]" id="file" accept="image/*" multiple>
 								</div>
 								<div class="file-path-wrapper">

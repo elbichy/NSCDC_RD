@@ -71,14 +71,14 @@
 									</ul>
 								@endforeach
 							@else
-								<tr>
-									<td colspan="2" style="text-align:center;">No Documents Uploaded</td>
-								</tr>
+								<div style="'display:flex; align-items: center;">
+									<span>No Documents Uploaded</span>
+								</div>
 							@endif
 						</div>
-						@hasanyrole('super admin|state admin')
+						{{-- @hasanyrole('super admin|state admin') --}}
 						<div class="table_form_wrapper">
-							<form action="{{ route('personnel_upload_file', $file->id) }}" method="POST" class="card add_record_form" enctype="multipart/form-data" id="document_upload">
+							<form action="{{ route('file_upload_document', $file->id) }}" method="POST" class="card add_record_form" enctype="multipart/form-data" id="document_upload">
 								@csrf
 								<div class="row">
 									<div class="col s12 l9 input-field">
@@ -93,7 +93,34 @@
 								</div>
 							</form>
 						</div>
-						@endhasanyrole
+						{{-- @endhasanyrole --}}
+					</div>
+
+					{{-- MENU COLLECTION --}}
+					<div class="fixed-action-btn">
+						<a class="btn-floating btn-large waves-effect waves-light blue darken-3">
+							{{-- <i class="large material-icons">mode_edit</i> --}}
+							<i class="fas fa-bars fa-lg"></i>
+						</a>
+						<ul>
+							<li>
+								<a href="{{ route('file_edit', $file->id) }}" title="Edit File" class="btn-floating blue editFile">
+									<i style="font-size: 1.33333em;" class="fas fa-pencil fa-lg"></i>
+								</a>
+							</li>
+
+							<li>
+								<a href="£" class="deleteFile btn-floating red" title="Delete File">
+									<i style="font-size: 1.33333em;" class="fas fa-trash fa-lg"></i>
+								</a>
+								{{-- DELETE FILE FORM --}}
+								<form action="{{ route('file_delete', $file->id) }}" method="post" id="deleteFile">
+									@method('delete')
+									@csrf
+								</form>
+							</li>
+
+						</ul>
 					</div>
 
                 </div>
@@ -106,6 +133,13 @@
 @endsection
 
 @push('scripts')
+	@if ($errors->any())
+    <script>
+        $(function() {
+            $('.editFileModal').modal('open');
+        });
+    </script>
+	@endif
     <script>
 		lightbox.option({
 			'resizeDuration': 200,
@@ -116,9 +150,8 @@
 		});
         $(function() {
 
-			// PASSPORT UPLOAD
-			$('#passport_upload').submit(function(){
-				$('.upload_file').html(`Uploading <i class="fas fa-circle-notch fa-spin"></i>`);
+			$('.fixed-action-btn').floatingActionButton({
+				direction: 'left'
 			});
 
 			// DOCS UPLOAD
@@ -129,6 +162,13 @@
 			$('.deleteDocument').click(function(event){
 				event.preventDefault();
 				if(confirm("Are you sure you want to delete document?")){
+					event.currentTarget.nextElementSibling.submit();
+				}
+			});
+
+			$('.deleteFile').click(function(event){
+				event.preventDefault();
+				if(confirm("Are you sure you want to delete the entire file?")){
 					event.currentTarget.nextElementSibling.submit();
 				}
 			});

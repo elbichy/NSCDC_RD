@@ -71,13 +71,11 @@ Route::group(['prefix' => 'dashboard'], function (){
 		Route::get('/personnel/{user}', [FileController::class, 'show'])->name('file_show');
 		Route::post('/store', [FileController::class, 'store'])->name('store_file');
 		Route::get('{user}/edit/', [FileController::class, 'edit'])->name('file_edit');
-		
-		
-		Route::put('/{user}/update', [FileController::class, 'update'])->name('file_update');
-		Route::post('/delete', [FileController::class, 'destroy'])->name('file_delete');
+		Route::put('/{file}/update', [FileController::class, 'update'])->name('file_update');
+		Route::delete('/{file}/delete', [FileController::class, 'destroy'])->name('file_delete');
 
 		Route::group(['prefix' => 'file'], function () {
-			Route::post('/upload/{user}', [FileController::class, 'upload_file'])->name('file_upload_file');
+			Route::post('/upload/{file}', [FileController::class, 'upload_file'])->name('file_upload_document');
 			Route::delete('/document/{document}/delete', [FileController::class, 'destroyDocument'])->name('deleteFileDocument');
 		});
 

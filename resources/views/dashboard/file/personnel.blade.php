@@ -1,6 +1,7 @@
 @extends('layouts.app', ['title' => 'All Redeployments Records'])
 
 @section('content')
+
     <div class="my-content-wrapper">
         <div class="content-container">
             <div class="sectionWrap">
@@ -10,14 +11,15 @@
                 {{-- SALES TABLE --}}
                 <div class="sectionTableWrap z-depth-1">
                     <div class="row topMenuWrap">
-                        {{-- <a href="#" id="blueBtn" class="blueBtn btn btn-small"><i class="material-icons right">format_list_bulleted</i>eligibility list</a>
-                        <a href="#" id="greenBtn" class="greenBtn btn btn-small green darken-2 white-text"><i class="material-icons right">format_list_bulleted</i>norminal roll</a> --}}
+                        {{-- <a href="#" id="blueBtn" class="blueBtn btn btn-small"><i class="material-icons right">format_list_bulleted</i>eligibility list</a> --}}
+                        <a href="{{ route('file_create') }}" id="greenBtn" class="greenBtn btn btn-small green darken-2 white-text"><i class="material-icons right">add</i>Create New</a>
                     </div>
                     <table class="table table-bordered" id="users-table">
                         <thead>
                             <tr>
                                 <th><input type='checkbox' class='browser-default selectAll'></th>
                                 <th>SN</th>
+                                <th>Passport</th>
                                 <th>File No.</th>
                                 <th>File name</th>
                                 <th>Type</th>
@@ -27,6 +29,7 @@
                             <tr>
                                 <th></th>
                                 <th>SN</th>
+                                <th>Passport</th>
                                 <th>File No.</th>
                                 <th>File name</th>
                                 <th>Type</th>
@@ -51,8 +54,12 @@
     <script src="{{ asset('js/datatable/vfs_fonts.js') }}"></script>
     <script src="{{ asset('js/datatable/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('js/datatable/buttons.print.min.js') }}"></script>
+    
     <script>
         $(function() {
+
+            
+
             // $('#users-table').wrapAll(`<div style="; overflow-x: scroll;"></div>`);
             $('#users-table').DataTable({
                 dom: 'lBfrtip',
@@ -72,6 +79,7 @@
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }, "orderable": false, "searchable": false
                     },
+                    { data: 'passport', name: 'passport'},
                     { data: 'file_number', name: 'file_number'},
                     { data: 'name', name: 'name' },
                     { data: 'type', name: 'type'},

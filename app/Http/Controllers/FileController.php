@@ -36,10 +36,24 @@ class FileController extends Controller
             ->editColumn('name', function ($file) {
                 return "<b><a href=\"/dashboard/files/personnel/$file->id\">$file->name</a></b>";
             })
+            ->editColumn('passport', function ($file) {
+                if($file->passport == NULL){
+
+                    return "<a href=\"/dashboard/files/personnel/$file->id\">
+                        <img src=".asset('storage/avaterMale.jpg')." alt=\"Profile Pic\" width=\"20%\">
+                    </a>";
+
+                }else{
+                    return "<a href=\"/dashboard/files/personnel/$file->id\">
+                        <img src=".asset('storage/files/'.$file->file_number.'/passport/'.$file->passport)." alt=\"Profile Pic\" width=\"20%\">
+                    </a>";
+                }
+                
+            })
             ->addColumn('checkbox', function($redeployment) {
                 return '<input type="checkbox" name="fileCheckbox[]" class="fileCheckbox browser-default" value="'.$redeployment->id.'" />';
             })
-            ->rawColumns(['name', 'checkbox'])
+            ->rawColumns(['passport', 'name', 'checkbox'])
             ->make();
     }
     
@@ -59,12 +73,30 @@ class FileController extends Controller
             'type' => 'required|string',
             
         ]);
+
+        $image_name = NULL;
+        if($request->has('passport')){
+
+            $val = $request->validate([
+                'passport' => 'required|image|mimes:jpeg,png,jpg,|max:800',
+            ]);
+
+            $file = $request->file('passport');
+            $image = $file->getClientOriginalName();
+            $ext = pathinfo($image, PATHINFO_EXTENSION);
+            $image_name = $request->file_number.'.'.$ext;
+            $file->storeAs('public/files/'.$request->file_number.'/passport/', $image_name);
+            // $image->storeAs('public/documents/'.$request->service_number.'/passport/', $image->getClientOriginalName());
+        }
         
         $files = File::create([
             'name' => $request->name,
             'file_number' => $request->file_number,
-            'type' => $request->type
+            'type' => $request->type,
+            'passport' => $image_name
         ]);
+
+        
 
         if($files){
             if($request->has('file')){
@@ -98,45 +130,30 @@ class FileController extends Controller
     // UPLOAD A FILE(S)
     public function upload_file(Request $request, File $file)
     {
-        
-        $image_name = $file->passport;
-        if($request->has('passport')){
-            $val = $request->validate([
-                'passport' => 'required|image|mimes:jpeg,png,jpg,|max:800',
-            ]);
-            $file = $request->file('passport');
-            $image = $file->getClientOriginalName();
-            $ext = pathinfo($image, PATHINFO_EXTENSION);
-            $image_name = $file->service_number.'.'.$ext;
-            $file->storeAs('public/files/'.$file->service_number.'/passport/', $image_name);
-
-            $file = $file->update([
-                'passport' => $image_name,
-            ]);
-        }
 
         if($request->has('file')){
             $images = $request->file('file');
             foreach($images as $image)
             {
                 $file_name = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
-                $image->storeAs('public/documents/'.$file->service_number.'/', $image->getClientOriginalName());
+                $image->storeAs('public/files/'.$file->file_number.'/', $image->getClientOriginalName());
 
                 $upload = $file->documents()->create([
                     'title' => $file_name,
-                    'file' => $image->getClientOriginalName()
+                    'file_name' => $image->getClientOriginalName()
                 ]);
             }
         }
 
-        Alert::success('File(s) uploaded successfully!', 'Success!')->autoclose(2500);
+        Alert::success('Document(s) uploaded successfully!', 'Success!')->autoclose(2500);
         return redirect()->route('file_show', $file->id);
     }
 
     // EDIT A FILE
     public function edit($file)
     {
-        return view('dashboard/file/edit');
+        $file = File::find($file);
+        return view('dashboard.file.edit',  compact(['file']));
     }
 
     
@@ -146,82 +163,44 @@ class FileController extends Controller
 
         $validation = $request->validate([
             'name' => 'required|string',
-            'dob' => 'required|date',
-            'soo' => 'required',
-            'lgoo' => 'string',
-            'cadre' => 'required|string',
-            'gl' => 'required|numeric',
-            'step' => 'required|numeric',
-            'dofa' => 'required|date',
-            'doc' => 'required|date',
-            'dopa' => 'required|date'
+            'file_number' => 'required|numeric',
+            'type' => 'required|string',
+            
         ]);
-
+        
         $image_name = $file->passport;
         if($request->has('passport')){
 
             $val = $request->validate([
-                'passport' => 'required|image|mimes:jpeg,png,jpg,|max:200',
+                'passport' => 'required|image|mimes:jpeg,png,jpg,|max:800',
             ]);
 
-            $file = $request->file('passport');
-            $image = $file->getClientOriginalName();
+            $passport = $request->file('passport');
+            $image = $passport->getClientOriginalName();
             $ext = pathinfo($image, PATHINFO_EXTENSION);
-            $image_name = $request->service_number.'.'.$ext;
-            $file->storeAs('public/documents/'.$request->service_number.'/passport/', $image_name);
+            $image_name = $request->file_number.'.'.$ext;
+            $passport->storeAs('public/files/'.$request->file_number.'/passport/', $image_name);
+            // $image->storeAs('public/documents/'.$request->service_number.'/passport/', $image->getClientOriginalName());
         }
 
-        $rank = Rank::where('cadre', $request->cadre)->where('gl', $request->gl)->first();
-        
-        // return $request;
-
-        $file = $file->update([
+        $update_file = $file->update([
             'name' => $request->name,
-            'dob' => $request->dob,
-            'sex' => $request->sex,
-            'blood_group' => $request->blood_group,
-            'marital_status' => $request->marital_status,
-            'soo' => $request->soo,
-            'lgoo' => $request->lgoo,
-            'residential_address' => $request->residential_address,
-            'phone_number' => $request->phone_number,
-            'email' => $request->email,
-            'cadre' => $request->cadre,
-            'gl' => $request->gl,
-            'step' => $request->step,
-            'rank_full' => $rank->full_title,
-            'rank_short' => $rank->short_title,
-            'dofa' => $request->dofa,
-            'doc' => $request->doc,
-            'dopa' => $request->dopa,
-            'bank' => $request->bank,
-            'account_number' => $request->account_number,
-            'bvn' => $request->bvn,
-            'paypoint' => $request->paypoint,
-            'salary_structure' => $request->salary_structure,
-            'nin_number' => $request->nin_number,
-            'nhis_number' => $request->nhis_number,
-            'ippis_number' => $request->ippis_number,
-            'nhf' => $request->nhf,
-            'pfa' => $request->pfa,
-            'pen_number' => $request->pen_number,
-            'specialization' => $request->specialization,
-            'passport' => $image_name,
+            'file_number' => $request->file_number,
+            'type' => $request->type,
+            'passport' =>  $image_name
         ]);
         
         Alert::success('File record updated successfully!', 'Success!')->autoclose(2500);
-        // return redirect()->route('file_show', $file->id);
+        return redirect()->route('file_show', $file->id);
     }
 
     // DELETE FILE RECORD
-    public function destroy(Request $request)
+    public function destroy(Request $request, File $file)
     {
-        $file = File::find($request->file);
-        $file->status = $request->reason;
-        $file->save();
+        Storage::deleteDirectory('public/files/'.$file->file_number);
         $file->delete();
         Alert::success('File record deleted successfully!', 'Success!')->autoclose(2500);
-        return redirect()->route('file_all');
+        return redirect()->route('file_personnel');
     }
 
     // DELETE FILE DOCUMENT

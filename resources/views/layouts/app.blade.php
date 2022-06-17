@@ -39,7 +39,7 @@
     <script type="text/javascript" src="{{asset('countdowntimer/src/js/jQuery.countdownTimer.js')}}"></script>
     <script src="{{asset('js/lightbox.js')}}"></script>
     <script src="{{asset('materialize-css/js/materialize.min.js')}}"></script>
-    <script src="{{ asset('js/vue.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/vue.min.js') }}"></script> --}}
     
 
     <link href="{{ asset('fontawesome/css/all.css') }}" rel="stylesheet"> <!-- font-awesome -->

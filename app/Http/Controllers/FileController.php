@@ -123,7 +123,7 @@ class FileController extends Controller
     // SHOW SPECIFIC FILE
     public function show(File $file)
     {   
-        $file = File::with('documents')->first();
+        $file = File::where('id', $file->id)->with('documents')->first();
         return view('dashboard.file.show', compact(['file']));
     }
 

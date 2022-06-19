@@ -121,9 +121,9 @@ class FileController extends Controller
 
 
     // SHOW SPECIFIC FILE
-    public function show(File $file)
+    public function show($file)
     {   
-        $file = File::where('id', $file->id)->with('documents')->first();
+        $file = File::where('id', $file)->with('documents')->first();
         return view('dashboard.file.show', compact(['file']));
     }
 
